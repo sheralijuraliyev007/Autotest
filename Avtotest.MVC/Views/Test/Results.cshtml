@@ -1,0 +1,23 @@
+﻿@model Avtotest.Data.Entities.Result
+
+<h1>Siz oldin bu tiketni bajargan ekansiz</h1>
+
+<h1 class="fw-bold">Sizning Natijangiz</h1>
+@{
+    var count = Model.CorrectAnswerCount;
+}
+
+<h3>To'g'ri javoblar soni : @count/20</h3>
+
+@{
+    if (count >= 18)
+    {
+        <h4 style="color:green">Siz testdan muvaffaqiyatli o'tdingiz</h4>
+    }
+    else
+    {
+        <h4 style="color:red">Siz testdan o'ta olmadingiz</h4>
+    }
+}
+
+<a class="btn btn-primary" asp-action="GetTests" asp-route-isRetaken="true" asp-route-ticketId="@Model.TicketId">Qayta ishlash</a>

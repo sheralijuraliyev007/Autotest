@@ -1,0 +1,38 @@
+﻿<form asp-action="Tickets" method="post">
+
+    @for(int i=1;i<36; i++)
+    {
+        <div class="card">
+            <img src="https://i.pinimg.com/originals/a1/c6/1c/a1c61c093ca626897308f9340e1f891e.jpg" alt="Avatar" style="width:100%">
+            <div class="container">
+                <h4><b>Ticket @i</b></h4>
+
+                
+                <button asp-route-id="@i" type="submit" asp-route-id="@i">Go to Ticket</button>
+            </div>
+        </div>
+    }
+</form>
+
+
+
+
+
+
+
+
+<style>
+        .card {
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+          transition: 0.3s;
+          width: 40%;
+        }
+
+        .card:hover {
+          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+        .container {
+          padding: 2px 16px;
+        }
+</style>

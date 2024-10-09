@@ -1,0 +1,200 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+.container {
+    width: 80%;
+    margin: 50px auto;
+}
+
+.languages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+    .languages button {
+        width: 120px;
+        height: 40px;
+        cursor: pointer;
+        background-color: white;
+        border: 2px solid green;
+        border-radius: 10px;
+        color: green;
+    }
+
+        .languages button:active {
+            background-color: rgba(155, 151, 151, 0.513);
+            transition: 0.1s;
+        }
+
+.paginition_part {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.finish_test_button {
+    width: 200px;
+    height: 50px;
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+/* pagination position styling */
+.pagination_section {
+    position: relative;
+}
+
+    /* pagination styling */
+    .pagination_section a {
+        color: black;
+        padding: 2px 6px;
+        text-decoration: none;
+    }
+
+        /* pagination hover effect on non-active */
+        .pagination_section a:hover:not(.active) {
+            background-color: #031f3b;
+            color: white;
+        }
+
+/* pagination hover effect on active*/
+
+
+
+a:nth-child(1) {
+    font-weight: bold;
+}
+
+.active{
+    background-color:blue;
+}
+
+.correctAnswer {
+    background-color: green;
+}
+.incorrectAnswer {
+    background-color:red;
+}
+
+/* timer */
+.base-timer {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.base-timer__svg {
+    transform: scaleX(-1);
+}
+
+.base-timer__circle {
+    fill: none;
+    stroke: none;
+}
+
+.base-timer__path-elapsed {
+    stroke-width: 7px;
+    stroke: grey;
+}
+
+.base-timer__path-remaining {
+    stroke-width: 7px;
+    stroke-linecap: round;
+    transform: rotate(90deg);
+    transform-origin: center;
+    transition: 1s linear all;
+    fill-rule: nonzero;
+    stroke: currentColor;
+}
+
+    .base-timer__path-remaining.green {
+        color: rgb(65, 184, 131);
+    }
+
+    .base-timer__path-remaining.orange {
+        color: orange;
+    }
+
+    .base-timer__path-remaining.red {
+        color: red;
+    }
+
+.base-timer__label {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+}
+
+.question_part {
+    width: 100%;
+    margin-top: 50px;
+}
+
+    .question_part p {
+        width: 100%;
+        text-align: center;
+    }
+
+.line {
+    width: 100%;
+    border-bottom: 1px solid gray;
+}
+
+.variants_part {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.image_part {
+    width: 48%;
+}
+
+    .image_part img {
+        width: 100%;
+    }
+
+.variant {
+    width: 50%;
+}
+
+    .variant input {
+        width: calc(100% - 15px);
+        margin-top: 10px;
+        padding: 15px 0 15px 15px;
+        cursor: pointer;
+    }
