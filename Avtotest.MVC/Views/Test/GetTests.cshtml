@@ -1,7 +1,6 @@
 ﻿@using Avtotest.Data.Entities.TestEntities
 @model Avtotest.Data.Entities.TestEntities.Test
 
-
 @{
     Ticket ticket = ViewBag.Ticket;
     HttpContext context = ViewBag.Context;
@@ -12,9 +11,9 @@
 
 <div class="container">
     <div class="languages">
-        <a class="btn btn-primary" type="submit" asp-route-ticketId="@ticket.Id" asp-route-testId="@test.Id" asp-action="GetTests" asp-route-language="uzb">Uzbek</a>
-        <a class="btn btn-primary" type="submit" asp-route-ticketId="@ticket.Id" asp-route-testId="@test.Id" asp-action="GetTests" asp-route-language="kiril">Kiril</a>
-        <a class="btn btn-primary" type="submit" asp-route-ticketId="@ticket.Id" asp-route-testId="@test.Id" asp-action="GetTests" asp-route-language="ru">Rus</a>
+        <a class="btn btn-language" asp-route-ticketId="@ticket.Id" asp-route-testId="@test.Id" asp-action="GetTests" asp-route-language="uzb">Uzbek</a>
+        <a class="btn btn-language" asp-route-ticketId="@ticket.Id" asp-route-testId="@test.Id" asp-action="GetTests" asp-route-language="kiril">Kiril</a>
+        <a class="btn btn-language" asp-route-ticketId="@ticket.Id" asp-route-testId="@test.Id" asp-action="GetTests" asp-route-language="ru">Rus</a>
     </div>
 
     <div class="paginition_part">
@@ -41,71 +40,65 @@
                 {
                     nextId = test.Id + 1;
                 }
-            }   
+            }
+
             <div class="pagination_section">
-                <a asp-action="GetTests" asp-route-testId="@previousId" asp-route-ticketId="@ticket.Id"> Previous </a>
-                @for(int i = ticket.StartIndex; i <= ticket.EndIndex; i++)
+                <a asp-action="GetTests" asp-route-testId="@previousId" asp-route-ticketId="@ticket.Id">Previous</a>
+                @for (int i = ticket.StartIndex; i <= ticket.EndIndex; i++)
                 {
                     string choiceId = context.Request.Cookies[i.ToString()];
                     if (!string.IsNullOrEmpty(choiceId))
                     {
-
                         int selectedId = Convert.ToInt32(choiceId);
                         var selectedTest = tests.Find(test => test.Id == i);
                         var answer = selectedTest.Choices[selectedId].Answer;
 
                         if (answer)
                         {
-                            <a class="correctAnswer" style="color:white" asp-action="GetTests" asp-route-ticketId="@ticket.Id" asp-route-testId="@i">@i</a>
+                            <a class="correctAnswer" asp-action="GetTests" asp-route-ticketId="@ticket.Id" asp-route-testId="@i">@i</a>
                         }
                         else
                         {
-                            <a class="incorrectAnswer" style="color:white" asp-action="GetTests" asp-route-ticketId="@ticket.Id" asp-route-testId="@i">@i</a>
+                            <a class="incorrectAnswer" asp-action="GetTests" asp-route-ticketId="@ticket.Id" asp-route-testId="@i">@i</a>
                         }
                     }
                     else
                     {
                         if (test.Id == i)
                         {
-                            <a class="active" style="color:white" asp-action="GetTests" asp-route-ticketId="@ticket.Id" asp-route-testId="@i">@i</a>
+                            <a class="active" asp-action="GetTests" asp-route-ticketId="@ticket.Id" asp-route-testId="@i">@i</a>
                         }
                         else
                         {
                             <a asp-action="GetTests" asp-route-ticketId="@ticket.Id" asp-route-testId="@i">@i</a>
                         }
                     }
-
-
-
                 }
-                <a asp-action="GetTests" asp-route-testId="@nextId" asp-route-ticketId="@ticket.Id"> Next </a>
+                <a asp-action="GetTests" asp-route-testId="@nextId" asp-route-ticketId="@ticket.Id">Next</a>
             </div>
         </div>
+
         <div class="timer">
             <div id="app"></div>
         </div>
     </div>
 
     <div class="question_part">
-        <p>@test.Question</p>
+        <p class="question-text">@test.Question</p>
         <div class="line"></div>
         <div class="variants_part">
             <div class="image_part">
-                @{
-                    if (test.Media.Exist)
-                    {
-                        string path = $"{test.Media.Name}.png";
-                        <img src="~/Autotest/@path" alt=""/>
-
-                    }
-                    else
-                    {
-                        <img src="~/OIP.jpg" alt="" />
-                    }
-
+                @if (test.Media.Exist)
+                {
+                    string path = $"{test.Media.Name}.png";
+                    <img src="~/Autotest/@path" alt="" />
                 }
-                
+                else
+                {
+                    <img src="~/OIP.jpg" alt="" />
+                }
             </div>
+
             <div class="variant">
                 <form asp-action="GetTestsPost" method="post">
                     @{
@@ -113,12 +106,10 @@
                     }
                     @foreach (var choice in test.Choices)
                     {
-
                         string choiceId = context.Request.Cookies[test.Id.ToString()];
 
                         if (!string.IsNullOrEmpty(choiceId))
                         {
-
                             int selectedId = Convert.ToInt32(choiceId);
                             if (row == selectedId)
                             {
@@ -154,3 +145,125 @@
         </div>
     </div>
 </div>
+
+<style>
+        bo dy {
+        background: url('https://www.transparenttextures.com/patterns/black-tie.png'), linear-gradient(135deg, rgba(20, 20, 40, 0.85), rgba(30, 50, 90, 0.75)); /* Pattern + Gradient */
+
+        background-size: cover;
+        background-attachment: fixed;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+             color: #fff;
+        margin: 0;
+
+        padding: 0;
+    }
+
+        .c ontainer {
+        max-width: 1200px;
+
+        margin: 0 auto;
+        z-index: 1;
+        position: relative;
+    }
+
+    .languages {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 2rem;
+    }
+
+    .btn-language {
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        font-size: 1rem;
+        border-radius: 25px;
+        padding: 10px 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-language:hover {
+        background-color: #ff5f5f;
+    }
+
+    .paginition_part {
+        text-align: center;
+        margin-top: 3rem;
+    }
+
+    .finish_test_button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 30px;
+        border-radius: 25px;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .finish_test_button:hover {
+        background-color: #45a049;
+    }
+
+    .pagination_section a {
+        margin: 0 5px;
+        padding: 10px;
+        font-size: 1.1rem;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .pagination_section a:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .question-text {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .image_part img {
+        width: 100%;
+        border-radius: 10px;
+        max-width: 600px;
+    }
+
+    .variant button {
+        width: 100%;
+        margin-top: 10px;
+        font-size: 1rem;
+        padding: 12px 20px;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .variant button:hover {
+        transform: scale(1.05);
+    }
+
+    .variant .btn-success {
+        background-color: #28a745;
+    }
+
+    .variant .btn-danger {
+        background-color: #dc3545;
+    }
+
+    .line {
+        height: 1px;
+        background-color: #ccc;
+        margin: 20px 0;
+    }
+
+    /* Keyframe Animation */
+    @@-webkit-keyframes fadeIn {
+from {opacity: 0;} 
+to {opacity: 1;}
+}
+
+@@keyframes fadeIn {
+from {opacity: 0;}
+to {opacity:1 ;}
+}
+
+</style>
